@@ -1,6 +1,5 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-
-export class DoctorGuard {
+export class PatientGuard {
 	authentication(token: string) {
 		try {
 			return jwt.verify(token, String(process.env["JWT_KEY"])) as JwtPayload;
@@ -19,7 +18,7 @@ export class DoctorGuard {
 				return false;
 			}
 			return true;
-		} catch {
+		} catch (err) {
 			return false;
 		}
 	}
