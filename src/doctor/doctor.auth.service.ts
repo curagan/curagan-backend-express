@@ -1,5 +1,9 @@
 import { PrismaService } from "../prisma.service";
-import { DoctorLogin, DoctorRegister } from "./doctor.interface";
+import {
+	ChangePassword,
+	DoctorLogin,
+	DoctorRegister,
+} from "./doctor.interface";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -73,6 +77,42 @@ export class DoctorAuth {
 		return {
 			code: 404,
 			response: "Username not found",
+		};
+	}
+
+	async changePassword(id: string, data: ChangePassword) {
+		const isExist = await this.prismaService.doctor.findFirst({
+			where: {
+				id: id,
+			},
+		});
+		if (!isExist) {
+			return {
+				code: 404,
+				response: "User Not Found",
+			};
+		}
+		const passwordCheck = bcrypt.compareSync(
+			data.oldPassword,
+			isExist.password
+		);
+		if (!passwordCheck) {
+			return {
+				code: 403,
+				response: "Invalid Password",
+			};
+		}
+		const response = await this.prismaService.doctor.update({
+			where: {
+				id: id,
+			},
+			data: {
+				password: data.newPassword,
+			},
+		});
+		return {
+			code: 201,
+			response: response,
 		};
 	}
 }
