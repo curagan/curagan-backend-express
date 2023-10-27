@@ -62,6 +62,7 @@ export class DoctorAuth {
 				};
 			}
 			const payload = {
+				id: response.id,
 				email: response.email,
 				name: response.name,
 			};
@@ -69,9 +70,14 @@ export class DoctorAuth {
 				expiresIn: "24h",
 				algorithm: "HS256",
 			});
+			const returnValue = {
+				id: response.id,
+				access_token: token,
+				role: "doctor",
+			};
 			return {
 				code: 200,
-				response: token,
+				response: returnValue,
 			};
 		}
 		return {

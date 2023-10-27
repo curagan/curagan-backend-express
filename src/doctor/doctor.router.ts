@@ -42,14 +42,15 @@ const authorizationMiddleware = (
 		);
 		if (doctorGuard.authorization(req.params.id, token)) {
 			next();
+		} else {
+			res.status(403).json("Forbidden");
 		}
-		res.status(403).json("Forbidden");
 	} catch (err) {
 		res.status(500).json("Server Error");
 	}
 };
 
-doctorRouter.post("auth/register", async (req, res) => {
+doctorRouter.post("/auth/register", async (req, res) => {
 	try {
 		const response = await doctorAuth.register(req.body);
 		res.status(response.code).json(response.response);
@@ -58,7 +59,7 @@ doctorRouter.post("auth/register", async (req, res) => {
 	}
 });
 
-doctorRouter.post("auth/login", async (req, res) => {
+doctorRouter.post("/auth/login", async (req, res) => {
 	try {
 		const response = await doctorAuth.login(req.body);
 		res.status(response.code).json(response.response);
@@ -102,20 +103,16 @@ doctorRouter
 			res.status(500).json(err);
 		}
 	})
-	.patch(
-		authenticationMiddleware,
-		authorizationMiddleware,
-		async (req, res) => {
-			try {
-				const id = req.params.id;
-				const data: EditDoctor = req.body;
-				const response = await doctorService.editDoctorData(id, data);
-				res.status(response.code).json(response.response);
-			} catch (err) {
-				res.status(500).json(err);
-			}
+	.put(authenticationMiddleware, authorizationMiddleware, async (req, res) => {
+		try {
+			const id = req.params.id;
+			const data: EditDoctor = req.body;
+			const response = await doctorService.editDoctorData(id, data);
+			res.status(response.code).json(response.response);
+		} catch (err) {
+			res.status(500).json(err);
 		}
-	)
+	})
 	.delete(
 		authenticationMiddleware,
 		authorizationMiddleware,

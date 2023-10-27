@@ -40,9 +40,14 @@ export class PatientAuth {
 			expiresIn: "24h",
 			algorithm: "HS256",
 		});
+		const returnValue = {
+			id: response.id,
+			access_token: token,
+			role: "patient",
+		};
 		return {
 			code: 200,
-			response: token,
+			response: returnValue,
 		};
 	}
 
@@ -59,7 +64,13 @@ export class PatientAuth {
 			};
 		}
 		const response = await this.prismaService.patient.create({
-			data: data,
+			data: {
+				...data,
+				password: bcrypt.hashSync(
+					data.password,
+					Number(process.env["HASH_SALT"])
+				),
+			},
 		});
 		response.password = "";
 		return {

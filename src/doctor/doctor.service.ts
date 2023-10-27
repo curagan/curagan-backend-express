@@ -62,7 +62,8 @@ export class DoctorService {
 				imageURL: data.imageURL || isExist.imageURL,
 				location: data.location || isExist.location,
 				hospital: data.hospital || isExist.hospital,
-				schedule: data.schedule || isExist.schedule,
+				schedule:
+					JSON.stringify(data.schedule) || JSON.stringify(isExist.schedule),
 			};
 			const response = await this.prismaService.doctor.update({
 				where: {

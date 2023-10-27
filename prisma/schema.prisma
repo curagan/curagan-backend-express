@@ -39,7 +39,8 @@ model AppointmentPatientDoctor {
   doctor        Doctor?  @relation(fields: [doctorID], references: [id])
   doctorID      String?
   datetime      DateTime
-  status        Status
+  status        Status   @default(Submitted)
+  message       String?
 }
 
 enum Specialization {

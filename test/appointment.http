@@ -1,0 +1,24 @@
+### CREATE APPOINTMENT
+POST http://localhost:4000/appointment/create-appointment
+Content-Type: application/json
+
+{
+    "patientID":"666550f8-4d71-4ac4-a1f8-fdf29c3923db",
+    "doctorID":"a3f0d21a-043c-411a-a76d-7231964e9e99",
+    "datetime": "2023-10-26"
+}
+
+### UPDATE APPOINTMENT STATUS
+POST http://localhost:4000/appointments/8ca9cebd-7d04-4fc1-9492-aa011dc3d224
+Content-Type: application/json
+
+{
+    "status": "abc",
+    "message": ""
+}
+
+### GET DATA
+GET http://localhost:4000/appointments/my-appointments/a3f0d21a-043c-411a-a76d-7231964e9e99
+
+### GET DATA
+GET http://localhost:4000/appointments/4d8c6b72-2df3-48f9-bf80-056ef305c2b3

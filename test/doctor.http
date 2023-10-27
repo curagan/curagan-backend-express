@@ -1,3 +1,16 @@
+### REGISTER DOCTOR
+
+POST http://localhost:4000/doctor/auth/register
+Content-Type: application/json
+
+{
+    "email":  "doctor@test.com",
+    "password": "doctor",
+    "name":"Doctor Test",
+    "imageURL":"Test",
+    "location": "Jakarta",
+    "hospital":"RSCM"
+}
 
 ### GET ALL DOCTOR
 GET http://localhost:4000/doctor
