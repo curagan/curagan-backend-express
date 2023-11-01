@@ -36,7 +36,6 @@ export class AppointmentService {
 		const response = await this.prismaService.appointmentPatientDoctor.create({
 			data: data,
 		});
-		console.log(response);
 		const connect = await this.prismaService.appointmentPatientDoctor.update({
 			where: {
 				appointmentId: response.appointmentId,
