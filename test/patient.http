@@ -4,8 +4,8 @@ POST http://localhost:4000/patient/auth/register
 Content-Type: application/json
 
 {
-    "email":  "patient1@test.com",
-    "password": "patient1",
+    "email":  "patient@test.com",
+    "password": "patient",
     "name":"Patient Test",
     "imageURL":"Test"
 }

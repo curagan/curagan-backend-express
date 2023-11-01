@@ -43,6 +43,16 @@ model AppointmentPatientDoctor {
   message       String?
 }
 
+model Notification {
+  notificationId String @id @default(uuid())
+  senderId       String
+  senderRole     String
+  targetId       String
+  targetRole     String
+  message        String
+  appointmentId  String
+}
+
 enum Specialization {
   Umum
   Jantung

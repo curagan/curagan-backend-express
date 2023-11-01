@@ -12,7 +12,6 @@ export class DoctorGuard {
 	authorization(userID: string, token: string) {
 		try {
 			const decodedToken = this.authentication(token);
-			console.log(decodedToken);
 			if (typeof decodedToken === "boolean") {
 				return false;
 			}
