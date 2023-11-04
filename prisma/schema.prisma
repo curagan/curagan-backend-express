@@ -44,13 +44,14 @@ model AppointmentPatientDoctor {
 }
 
 model Notification {
-  notificationId String @id @default(uuid())
+  notificationId String  @id @default(uuid())
   senderId       String
   senderRole     String
   targetId       String
   targetRole     String
   message        String
   appointmentId  String
+  isRead         Boolean @default(false)
 }
 
 enum Specialization {
