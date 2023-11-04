@@ -1,0 +1,8 @@
+version: '3'
+services:
+  app:
+    image: curagan-backend   # Use the image you built earlier
+    ports:
+      - "4000:4000"            # Map the port used by your application to the host machine
+    volumes:
+      - ./dist:/app/dist       # Mount the 'dist' directory as a volume inside the container
