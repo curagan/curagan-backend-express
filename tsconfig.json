@@ -15,6 +15,7 @@
       "strictNullChecks": true,
       "strictFunctionTypes": true,
       "strictPropertyInitialization": true,
+      "skipLibCheck": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "lib": ["es6", "dom"]

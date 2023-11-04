@@ -1,6 +1,7 @@
 import { CreateAppointment } from "./appointments.interface";
 import { PrismaService } from "../prisma.service";
-import { Status } from "@prisma/client";
+
+type Status = "Pending" | "Submitted" | "Accepted" | "Rejected" | "Done";
 export class AppointmentService {
 	constructor(private readonly prismaService: PrismaService) {}
 
