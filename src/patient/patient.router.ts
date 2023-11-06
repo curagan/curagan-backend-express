@@ -115,7 +115,7 @@ patientRouter
 	);
 
 patientRouter.post(
-	"/change-password//:id",
+	"/change-password/:id",
 	authenticationMiddleware,
 	authorizationMiddleware,
 	async (req, res) => {
