@@ -11,3 +11,12 @@ export enum Status {
 	Rejected,
 	Done,
 }
+
+export interface EditAppointment {
+	appointmentId: string;
+	patientID: string | null;
+	doctorID: string | null;
+	datetime: Date;
+	status: Status;
+	message: string | null;
+}
