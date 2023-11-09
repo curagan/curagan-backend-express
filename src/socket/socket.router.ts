@@ -23,7 +23,6 @@ const initSocket = (server: httpServer) => {
 		});
 
 		socket.on("createAppointment", async (data: PatientDoctor) => {
-			console.log(data);
 			const userId = data.targetId;
 			const response = await notificationService.createNotification(data);
 			if (response) {

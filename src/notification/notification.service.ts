@@ -5,7 +5,6 @@ export class NotificationService {
 	constructor(private readonly prismaService: PrismaService) {}
 
 	async createNotification(data: Notification) {
-		console.log(data);
 		const response = await this.prismaService.notification.create({
 			data: data,
 		});
