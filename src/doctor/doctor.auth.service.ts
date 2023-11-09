@@ -65,6 +65,7 @@ export class DoctorAuth {
 				id: response.id,
 				email: response.email,
 				name: response.name,
+				role: "doctor",
 			};
 			const token = jwt.sign(payload, String(process.env["JWT_KEY"]), {
 				expiresIn: "24h",

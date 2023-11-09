@@ -16,13 +16,14 @@ model Patient {
   password    String
   name        String
   imageURL    String
+  preferences Preferences[]
   appointment AppointmentPatientDoctor[]
 }
 
 model Doctor {
   id             String                     @id @default(uuid())
   email          String                     @unique
-  specialization String                     @default("Umum")
+  specialization Specialization             @default(Umum)
   password       String
   name           String
   imageURL       String
@@ -44,14 +45,22 @@ model AppointmentPatientDoctor {
 }
 
 model Notification {
-  notificationId String  @id @default(uuid())
+  notificationId String   @id @default(uuid())
   senderId       String
   senderRole     String
   targetId       String
   targetRole     String
   message        String
   appointmentId  String
-  isRead         Boolean @default(false)
+  isRead         Boolean  @default(false)
+  createdAt      DateTime
+}
+
+model Preferences {
+  id          String         @id @default(uuid())
+  patient     Patient        @relation(fields: [patientId], references: [id])
+  patientId   String
+  preferences Specialization
 }
 
 enum Specialization {

@@ -1,6 +1,6 @@
 ### REGISTER DOCTOR
 
-POST http://localhost:4000/doctor/auth/register
+POST https://curagan-backend-express-production.up.railway.app/doctor/auth/register
 Content-Type: application/json
 
 {
@@ -17,3 +17,7 @@ GET http://localhost:4000/doctor
 
 ### GET DOCTOR BY NAME
 GET http://localhost:4000/doctor/search/budi
+
+### GET DOCTOR BY ID
+GET http://localhost:4000/doctor/a3f0d21a-043c-411a-a76d-7231964e9e99
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ3NGNjYTFhLTYwNDEtNGQxOC05MzNlLTQ0N2RlZWM0MDM4MSIsImVtYWlsIjoicGF0aWVudDFAdGVzdC5jb20iLCJuYW1lIjoiUGF0aWVudCBUZXN0Iiwicm9sZSI6InBhdGllbnQiLCJpYXQiOjE2OTk0NTI1MzgsImV4cCI6MTY5OTUzODkzOH0.mEnnwwmDvVEPCDRRRlGXRQuxR59aIojgis1xjilwW50

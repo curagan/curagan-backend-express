@@ -4,15 +4,21 @@ import { DoctorAuth } from "./doctor.auth.service";
 import { DoctorService } from "./doctor.service";
 import { ChangePassword, EditDoctor } from "./doctor.interface";
 import { DoctorGuard } from "./doctor.guard";
+import { PreferencesService } from "../preferences/preferences.service";
 
 const prismaService = new PrismaService();
 const doctorAuth = new DoctorAuth(prismaService);
 const doctorService = new DoctorService(prismaService);
 const doctorRouter = express.Router();
 const doctorGuard = new DoctorGuard();
+const preferencesService = new PreferencesService();
+
+interface CustomRequest extends Request {
+	userId: string;
+}
 
 const authenticationMiddleware = (
-	req: Request,
+	req: CustomRequest,
 	res: Response,
 	next: NextFunction
 ) => {
@@ -22,17 +28,21 @@ const authenticationMiddleware = (
 		);
 		const checkToken = doctorGuard.authentication(token);
 		if (checkToken) {
+			req.userId = checkToken.id;
+			req.role = checkToken.role;
 			next();
 		} else {
 			res.status(401).json("Invalid Token");
 		}
 	} catch (err) {
+		req.userId = "";
+		req.role = "patient";
 		res.status(500).json("Error authenticating");
 	}
 };
 
 const authorizationMiddleware = (
-	req: Request,
+	req: CustomRequest,
 	res: Response,
 	next: NextFunction
 ) => {
@@ -94,9 +104,12 @@ doctorRouter.get("/search", async (req, res) => {
 
 doctorRouter
 	.route("/:id")
-	.get(async (req, res) => {
+	.get(authenticationMiddleware, async (req, res) => {
 		try {
 			const id = req.params.id;
+			if (req.role === "patient" && req.userId) {
+				preferencesService.updatePreferences(req.userId, id);
+			}
 			const response = await doctorService.getDoctorById(id);
 			res.status(response.code).json(response.response);
 		} catch (err) {
