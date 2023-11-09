@@ -5,5 +5,5 @@ export interface Notification {
 	targetRole: string;
 	message: string;
 	appointmentId: string;
-	createdAt: String;
+	createdAt: string;
 }
