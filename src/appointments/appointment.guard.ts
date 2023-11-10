@@ -12,6 +12,8 @@ export class AppointmentGuard {
 	authorization(userID: string, token: string) {
 		try {
 			const decodedToken = this.authentication(token);
+			console.log("authorization: ", decodedToken);
+			console.log("userId: ", userID);
 			if (typeof decodedToken === "boolean") {
 				return false;
 			}
@@ -27,16 +29,19 @@ export class AppointmentGuard {
 	roleGuard(userID: string, token: string) {
 		try {
 			const isAuthorized = this.authorization(userID, token);
+			console.log("isAuthorized:", isAuthorized);
 			if (!isAuthorized) {
 				return false;
 			}
 			const decodedToken = this.authentication(token);
+
 			if (typeof decodedToken === "boolean") {
 				return false;
 			}
 			if (decodedToken.role !== "doctor") {
 				return false;
 			}
+			console.log(decodedToken);
 			return true;
 		} catch (err) {
 			return false;
