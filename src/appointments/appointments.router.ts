@@ -90,7 +90,13 @@ appointmentRouter.get(
 	async (req, res) => {
 		try {
 			const userId = req.params.userId;
-			const response = await appointmentService.getAppointmentByUserId(userId);
+			const start = String(req.query.start);
+			const end = String(req.query.end);
+			const response = await appointmentService.getAppointmentByUserId(
+				userId,
+				start,
+				end
+			);
 			res.status(response.code).json(response.response);
 		} catch (err) {
 			res.status(500).json(err);
