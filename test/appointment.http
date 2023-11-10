@@ -9,17 +9,18 @@ Content-Type: application/json
 }
 
 ### UPDATE APPOINTMENT STATUS
-PATCH http://localhost:4000/appointments/f9782c33-8704-4f23-bc17-9349f09703b8/3be28111-f526-452b-b7a6-c04931f9a0ae
+PATCH https://curagan-backend-express-production.up.railway.app/appointments/f9782c33-8704-4f23-bc17-9349f09703b8/3be28111-f526-452b-b7a6-c04931f9a0ae
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZTI4MTExLWY1MjYtNDUyYi1iN2E2LWMwNDkzMWY5YTBhZSIsImVtYWlsIjoiZG9jdG9yQHRlc3QuY29tIiwibmFtZSI6IkRvY3RvciBUZXN0Iiwicm9sZSI6ImRvY3RvciIsImlhdCI6MTY5OTYxMzAzMiwiZXhwIjoxNjk5Njk5NDMyfQ.gHGtex92ZWPafMVA_UEb6YCP9mc3x2sRwXv2rNZ1zU0
 
 {
     "status": "Accepted",
-    "message": "Accept Appointments"
+    "message": "Accept Appointments 123"
 }
 
-### GET DATA
-GET http://localhost:4000/appointments/my-appointments/a3f0d21a-043c-411a-a76d-7231964e9e99
+### GET HISTORY
+GET http://localhost:4000/appointments/my-appointments/3be28111-f526-452b-b7a6-c04931f9a0ae
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiZTI4MTExLWY1MjYtNDUyYi1iN2E2LWMwNDkzMWY5YTBhZSIsImVtYWlsIjoiZG9jdG9yQHRlc3QuY29tIiwibmFtZSI6IkRvY3RvciBUZXN0Iiwicm9sZSI6ImRvY3RvciIsImlhdCI6MTY5OTYxMzAzMiwiZXhwIjoxNjk5Njk5NDMyfQ.gHGtex92ZWPafMVA_UEb6YCP9mc3x2sRwXv2rNZ1zU0
 
 ### GET DATA
 GET http://localhost:4000/appointments/4d8c6b72-2df3-48f9-bf80-056ef305c2b3
