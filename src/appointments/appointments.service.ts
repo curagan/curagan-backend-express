@@ -60,7 +60,7 @@ export class AppointmentService {
 		};
 	}
 
-	async getAppointmentByUserId(userId: string) {
+	async getAppointmentByUserId(userId: string, start: string, end: string) {
 		const response = await this.prismaService.appointmentPatientDoctor.findMany(
 			{
 				where: {
@@ -72,6 +72,10 @@ export class AppointmentService {
 							doctorID: userId,
 						},
 					],
+					datetime: {
+						gte: new Date(start) || new Date("2023-01-01"),
+						lte: new Date(end) || new Date(),
+					},
 				},
 			}
 		);
