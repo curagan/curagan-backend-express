@@ -61,9 +61,31 @@ export class AppointmentService {
 	}
 
 	async getAppointmentByUserId(userId: string, start: string, end: string) {
-		const startDate =
-			start !== "undefined" ? new Date(start) : new Date("2023-01-01");
-		const endDate = end !== "undefined" ? new Date(end) : new Date();
+		if (start !== "undefined" || end !== "undefined") {
+			const startDate = new Date(start);
+			const endDate = new Date(end);
+			const response =
+				await this.prismaService.appointmentPatientDoctor.findMany({
+					where: {
+						OR: [
+							{
+								patientID: userId,
+							},
+							{
+								doctorID: userId,
+							},
+						],
+						datetime: {
+							gte: startDate,
+							lte: endDate,
+						},
+					},
+				});
+			return {
+				code: 200,
+				response: response,
+			};
+		}
 		const response = await this.prismaService.appointmentPatientDoctor.findMany(
 			{
 				where: {
@@ -75,10 +97,6 @@ export class AppointmentService {
 							doctorID: userId,
 						},
 					],
-					datetime: {
-						gte: startDate,
-						lte: endDate,
-					},
 				},
 			}
 		);
