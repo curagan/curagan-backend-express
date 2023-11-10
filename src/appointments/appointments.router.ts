@@ -52,7 +52,7 @@ const roleGuard = (req: Request, res: Response, next: NextFunction) => {
 		const token = String(
 			req.headers["authorization"]?.split(" ")[1].replace("'", "")
 		);
-		if (appointmentGuard.roleGuard(req.params.id, token)) {
+		if (appointmentGuard.roleGuard(req.params.doctorId, token)) {
 			next();
 		}
 	} catch (err) {}
